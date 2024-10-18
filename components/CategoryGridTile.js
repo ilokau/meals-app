@@ -1,17 +1,17 @@
 import { Pressable, View, Text, StyleSheet, Platform } from 'react-native';
 
-function CategoryGridTile({ title, color }) {
+function CategoryGridTile({ title, color, onTilePress }) {
   return (
-    <View style={styles.gridItem}>
-      <Pressable
-        android_ripple={{ color: '#ccc' }}
-        style={({ pressed }) => [
-          styles.button,
-          pressed ? styles.buttonPressed : null,
-        ]}
+    <View style={styles.gridTile}>
+      <Pressable android_ripple={{ color: '#ccc'}} 
+      style={( { pressed }) => 
+      [styles.pressableButton,
+      pressed ? styles.pressableButtonPressed : null,
+      ]}
+      onPress={onTilePress}
       >
-        <View style={[styles.innerContainer, { backgroundColor: color }]}>
-          <Text style={styles.title}>{title}</Text>
+        <View style={[styles.innerGridTile , { backgroundColor : color }]}>
+          <Text style={styles.tileTitle}>{title}</Text>
         </View>
       </Pressable>
     </View>
@@ -21,34 +21,43 @@ function CategoryGridTile({ title, color }) {
 export default CategoryGridTile;
 
 const styles = StyleSheet.create({
-  gridItem: {
-    flex: 1,
-    margin: 16,
-    height: 150,
-    borderRadius: 8,
-    elevation: 4,
+  gridTile : {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'space-evenly',
+    margin: 10,
+    height: 120,
+    borderRadius: 10,
+    elevation: 1,
+    maxWidth: '30%',
     backgroundColor: 'white',
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    shadowRadius: 10,
+    overflow: Platform.OS === 'android' ? 'hidden': 'visible',
   },
-  button: {
+
+  pressableButton : {
     flex: 1,
   },
-  buttonPressed: {
+
+  pressableButtonPressed : { //visible reaction on iOS when pressed
     opacity: 0.5,
+
   },
-  innerContainer: {
+
+  innerGridTile : {
     flex: 1,
-    padding: 16,
-    borderRadius: 8,
+    padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
+
+  tileTitle : {
     fontWeight: 'bold',
-    fontSize: 18,
-  },
+    fontSize: 12,
+    textTransform: 'uppercase',
+    
+  }
 });
