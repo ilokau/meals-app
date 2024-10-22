@@ -5,13 +5,23 @@ import { MEALS } from '../data/dummy-data';
 
 function MealsScreen( { route }) {
     const categoryId = route.params.categoryId;
+    const categoryTitle = route.params.categoryTitle;
     const mealsDisplayed = MEALS.filter((meal) => {
         return meal.categoryIds.indexOf(categoryId) >= 0
     }
     );
 
     function renderMealItem(itemData) {
-        return <MealItem title={itemData.item.title} />
+        const item = itemData.item;
+        const mealProps = {
+            title: item.title,
+            imageUrl: item.imageUrl,
+            complexity: item.complexity,
+            duration: item.duration,
+            affordability: item.affordability,
+
+        };
+        return <MealItem {...mealProps}/>
     }
 
     return <View style={styles.container}>
