@@ -1,11 +1,21 @@
 import { View, Text, Pressable, Image, StyleSheet, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-function MealItem({ title, imageUrl, duration, complexity, affordability }) {
+function MealItem({ id, title, imageUrl, duration, complexity, affordability }) {
+    const navigation = useNavigation();
+
+    function selectMealHandler() {
+        navigation.navigate('Meal Details', {
+            mealId: id,
+        });
+    }
+
 return (
     <View style={styles.mealContainer}>
         <Pressable android_ripple={{ color: '#ccc'}}
         style={( { pressed }) => 
         (pressed ? styles.pressableButtonPressed : null)}
+        onPress={selectMealHandler}
         >
         <View style={styles.mealContainer}>
         <View>
@@ -31,7 +41,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         overflow: Platform.OS === 'android' ? 'hidden': 'visible',
         backgroundColor: 'white',
-        elevation: 4,
+        elevation: 1,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
@@ -73,7 +83,12 @@ const styles = StyleSheet.create({
     mealDetailsItem: {
         marginHorizontal: 4,
         fontSize: 12,
+        color: 'white',
+        paddingHorizontal: 4,
+        paddingVertical: 3,
+        backgroundColor: '#c289a6'
 
     }
     
 });
+
