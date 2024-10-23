@@ -1,17 +1,33 @@
-import { View, Image, Text, Pressable, StyleSheet, Platform, ScrollView } from 'react-native';
+import { View, Image, Text, Pressable, StyleSheet, Platform, ScrollView, } from 'react-native';
+import { useLayoutEffect } from 'react';
 import { MEALS } from '../data/dummy-data';
+
 import MealDetails from '../components/MealDetails';
 import Subtitle from '../components/MealDetail/Subtitle';
 import List from '../components/MealDetail/List';
+import IconButton from '../components/IconButton';
 
-function MealDetailsScreen( { route }) {
+function MealDetailsScreen( { route, navigation }) {
     const mealId = route.params.mealId;
 
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
+    function headerButtonHandler() {
+        console.log('Favorite button pressed');
+    }
+
+    useLayoutEffect (() => {
+        navigation.setOptions({
+            headerRight: () => {
+                return <IconButton onPress={headerButtonHandler}/>
+            }
+
+        });
+    }, [navigation, headerButtonHandler]);
+
 
     return (
-        <ScrollView style={styles.rootContainer}>
+        <ScrollView>
         <View style={styles.imageContainer}>
         <Image style={styles.image} source={{uri: selectedMeal.imageUrl}} />
         </View>

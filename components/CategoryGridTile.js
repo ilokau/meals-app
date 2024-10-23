@@ -1,8 +1,7 @@
 import { Pressable, View, Text, StyleSheet, Platform } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
 
 function CategoryGridTile({ title, color, onTilePress }) {
-  // const navigation = useNavigation();
+  
 
   return (
     <View style={styles.gridTile}>
@@ -31,9 +30,11 @@ const styles = StyleSheet.create({
     margin: 10,
     height: 120,
     borderRadius: 10,
-    elevation: 1,
     maxWidth: '30%',
     backgroundColor: 'white',
+    //shadow for android
+    elevation: 1,
+    //shadow for iOS
     shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
